@@ -1,11 +1,15 @@
 import React from 'react';
 import type { GroupResult } from '../utils/drawLogic';
+import { type Team } from '../data/teams';
+import { StartingXIModal } from './StartingXIModal';
 
 interface FullDrawViewProps {
     result: GroupResult[];
 }
 
 export const FullDrawView: React.FC<FullDrawViewProps> = ({ result }) => {
+    const [selectedTeam, setSelectedTeam] = React.useState<Team | null>(null);
+
     return (
         <div className="max-w-7xl mx-auto p-4 pb-16">
             <h3 className="text-2xl font-bold text-slate-800 mb-6 text-center">全グループ抽選結果</h3>
@@ -17,7 +21,11 @@ export const FullDrawView: React.FC<FullDrawViewProps> = ({ result }) => {
                         </div>
                         <div className="p-4 space-y-3">
                             {group.teams.map((team) => (
-                                <div key={team.id} className="flex items-center gap-3">
+                                <div
+                                    key={team.id}
+                                    className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onClick={() => setSelectedTeam(team)}
+                                >
                                     <div className="w-8 h-6 shadow-sm rounded overflow-hidden flex-shrink-0">
                                         <img src={`https://flagcdn.com/w40/${getFlagCode(team.id)}.png`} alt={team.name} className="w-full h-full object-cover" />
                                     </div>
@@ -31,6 +39,13 @@ export const FullDrawView: React.FC<FullDrawViewProps> = ({ result }) => {
                     </div>
                 ))}
             </div>
+
+            {selectedTeam && (
+                <StartingXIModal
+                    team={selectedTeam}
+                    onClose={() => setSelectedTeam(null)}
+                />
+            )}
         </div>
     );
 };

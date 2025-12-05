@@ -1,5 +1,6 @@
 export interface Venue {
     city: string;
+    country: string;
     stadium?: string; // Optional for now
     lat: number;
     lng: number;
@@ -11,32 +12,32 @@ export interface GroupSchedule {
     matches: {
         matchNumber: number; // 1, 2, 3 (Group stage match number for the team)
         venues: string[]; // List of venues for the match day (e.g. "Mexico City, Zapopan")
-        coordinates: { lat: number; lng: number }[]; // Coordinates for the venues
+        coordinates: { lat: number; lng: number; country: string }[]; // Coordinates for the venues
     }[];
 }
 
 // Approximate coordinates for 2026 World Cup Host Cities
-const CITIES: Record<string, { lat: number; lng: number }> = {
-    'メキシコシティ': { lat: 19.4326, lng: -99.1332 },
-    'サポパン': { lat: 20.7220, lng: -103.3910 }, // Guadalajara area
-    'グアダルーペ': { lat: 25.6769, lng: -100.2589 }, // Monterrey area
-    'トロント': { lat: 43.6532, lng: -79.3832 },
-    'バンクーバー': { lat: 49.2827, lng: -123.1207 },
-    'アトランタ': { lat: 33.7490, lng: -84.3880 },
-    'ボストン': { lat: 42.3601, lng: -71.0589 }, // Foxborough
-    'フォックスボロ': { lat: 42.0654, lng: -71.2478 },
-    'ダラス': { lat: 32.7767, lng: -96.7970 }, // Arlington
-    'アーリントン': { lat: 32.7357, lng: -97.1081 },
-    'ヒューストン': { lat: 29.7604, lng: -95.3698 },
-    'カンザスシティ': { lat: 39.0997, lng: -94.5786 },
-    'ロサンゼルス': { lat: 34.0522, lng: -118.2437 }, // Inglewood
-    'イングルウッド': { lat: 33.9617, lng: -118.3531 },
-    'マイアミ': { lat: 25.7617, lng: -80.1918 },
-    'NY/NJ': { lat: 40.8136, lng: -74.0743 }, // East Rutherford
-    'フィラデルフィア': { lat: 39.9526, lng: -75.1652 },
-    'サンフランシスコ': { lat: 37.7749, lng: -122.4194 }, // Santa Clara
-    'サンタクララ': { lat: 37.3541, lng: -121.9552 },
-    'シアトル': { lat: 47.6062, lng: -122.3321 },
+const CITIES: Record<string, { lat: number; lng: number; country: string }> = {
+    'メキシコシティ': { lat: 19.4326, lng: -99.1332, country: 'メキシコ' },
+    'サポパン': { lat: 20.7220, lng: -103.3910, country: 'メキシコ' }, // Guadalajara area
+    'グアダルーペ': { lat: 25.6769, lng: -100.2589, country: 'メキシコ' }, // Monterrey area
+    'トロント': { lat: 43.6532, lng: -79.3832, country: 'カナダ' },
+    'バンクーバー': { lat: 49.2827, lng: -123.1207, country: 'カナダ' },
+    'アトランタ': { lat: 33.7490, lng: -84.3880, country: 'アメリカ' },
+    'ボストン': { lat: 42.3601, lng: -71.0589, country: 'アメリカ' }, // Foxborough
+    'フォックスボロ': { lat: 42.0654, lng: -71.2478, country: 'アメリカ' },
+    'ダラス': { lat: 32.7767, lng: -96.7970, country: 'アメリカ' }, // Arlington
+    'アーリントン': { lat: 32.7357, lng: -97.1081, country: 'アメリカ' },
+    'ヒューストン': { lat: 29.7604, lng: -95.3698, country: 'アメリカ' },
+    'カンザスシティ': { lat: 39.0997, lng: -94.5786, country: 'アメリカ' },
+    'ロサンゼルス': { lat: 34.0522, lng: -118.2437, country: 'アメリカ' }, // Inglewood
+    'イングルウッド': { lat: 33.9617, lng: -118.3531, country: 'アメリカ' },
+    'マイアミ': { lat: 25.7617, lng: -80.1918, country: 'アメリカ' },
+    'NY/NJ': { lat: 40.8136, lng: -74.0743, country: 'アメリカ' }, // East Rutherford
+    'フィラデルフィア': { lat: 39.9526, lng: -75.1652, country: 'アメリカ' },
+    'サンフランシスコ': { lat: 37.7749, lng: -122.4194, country: 'アメリカ' }, // Santa Clara
+    'サンタクララ': { lat: 37.3541, lng: -121.9552, country: 'アメリカ' },
+    'シアトル': { lat: 47.6062, lng: -122.3321, country: 'アメリカ' },
 };
 
 export const GROUP_VENUES: Record<string, GroupSchedule> = {

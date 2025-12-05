@@ -8,6 +8,15 @@ interface TeamSelectorProps {
 
 const CONFEDERATIONS: Confederation[] = ['UEFA', 'CONMEBOL', 'AFC', 'CAF', 'CONCACAF', 'OFC'];
 
+const CONFED_NAMES: Record<Confederation, string> = {
+    'UEFA': '欧州 (UEFA)',
+    'CONMEBOL': '南米 (CONMEBOL)',
+    'AFC': 'アジア (AFC)',
+    'CAF': 'アフリカ (CAF)',
+    'CONCACAF': '北中米カリブ (CONCACAF)',
+    'OFC': 'オセアニア (OFC)'
+};
+
 export const TeamSelector: React.FC<TeamSelectorProps> = ({ onSelect }) => {
     const [search, setSearch] = useState('');
     const [filterConfed, setFilterConfed] = useState<Confederation | 'ALL'>('ALL');
@@ -60,7 +69,7 @@ export const TeamSelector: React.FC<TeamSelectorProps> = ({ onSelect }) => {
                                 : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                                 }`}
                         >
-                            {confed}
+                            {CONFED_NAMES[confed]}
                         </button>
                     ))}
                 </div>
@@ -100,7 +109,7 @@ export const TeamSelector: React.FC<TeamSelectorProps> = ({ onSelect }) => {
                         </div>
 
                         <div className="mt-3 pt-3 border-t border-slate-100 flex justify-between items-center">
-                            <span className="text-xs font-medium text-slate-500">{team.confederation}</span>
+                            <span className="text-xs font-medium text-slate-500">{CONFED_NAMES[team.confederation]}</span>
                             {team.isHost && (
                                 <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">開催国</span>
                             )}
